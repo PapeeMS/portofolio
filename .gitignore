@@ -1,0 +1,40 @@
+# Fichiers d'environnement
+.env
+.env.local
+.env.*.local
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.log
+
+# Dossiers de dépendances
+node_modules/
+venv/
+env/
+.venv/
+
+# Dossiers de build et dist
+dist/
+build/
+*.pyc
+__pycache__/
+
+# IDE et éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.cache/
+
+# Fichiers OS
+.AppleDouble
+.LSOverride
+ehthumbs.db

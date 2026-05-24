@@ -1,0 +1,673 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP — Customisé pour Pape Makhtar Sylla
+-->
+<html>
+	<head>
+		<title>Pape Makhtar Sylla — Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* ── Overrides personnalisés ── */
+			:root {
+				--accent: #00d4ff;
+				--accent2: #7b5ea7;
+			}
+
+			/* Image de profil dans le logo */
+			#header .logo {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			#header .logo .profile-img {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				object-fit: cover;
+				display: block;
+				border: 2px solid var(--accent);
+				cursor: pointer;
+				transition: transform 0.3s ease;
+			}
+			#header .logo .profile-img:hover {
+				transform: scale(1.05);
+			}
+
+			/* Lightbox modal */
+			.lightbox-modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				padding-top: 50px;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.9);
+				animation: fadeIn 0.3s;
+			}
+			.lightbox-modal.active {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.lightbox-content {
+				max-width: 90%;
+				max-height: 90vh;
+				object-fit: contain;
+			}
+			.lightbox-close {
+				position: absolute;
+				top: 20px;
+				right: 35px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				cursor: pointer;
+				z-index: 1001;
+			}
+			.lightbox-close:hover {
+				color: var(--accent);
+			}
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			/* Skill badges */
+			.skill-grid {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin: 1rem 0;
+			}
+			.skill-badge {
+				background: rgba(255,255,255,0.08);
+				border: 1px solid rgba(255,255,255,0.2);
+				border-radius: 4px;
+				padding: 0.3rem 0.75rem;
+				font-size: 0.82rem;
+				color: #fff;
+				letter-spacing: 0.04em;
+			}
+			.skill-badge.highlight {
+				background: rgba(0,212,255,0.15);
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+
+			/* Timeline formation */
+			.timeline {
+				list-style: none;
+				padding: 0;
+				margin: 1rem 0;
+				border-left: 2px solid rgba(255,255,255,0.2);
+				padding-left: 1.2rem;
+			}
+			.timeline li {
+				margin-bottom: 1.4rem;
+				position: relative;
+			}
+			.timeline li::before {
+				content: '';
+				width: 10px;
+				height: 10px;
+				background: var(--accent);
+				border-radius: 50%;
+				position: absolute;
+				left: -1.72rem;
+				top: 0.3rem;
+			}
+			.timeline .date {
+				font-size: 0.75rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 0.2rem;
+			}
+			.timeline .school {
+				font-size: 0.8rem;
+				opacity: 0.6;
+				margin-top: 0.15rem;
+			}
+
+			/* Projets cards */
+			.project-card {
+				background: rgba(255,255,255,0.05);
+				border: 1px solid rgba(255,255,255,0.12);
+				border-radius: 6px;
+				padding: 1rem 1.2rem;
+				margin-bottom: 0.9rem;
+				transition: border-color 0.25s;
+			}
+			.project-card:hover { border-color: var(--accent); }
+			.project-card h4 {
+				margin: 0 0 0.4rem;
+				font-size: 0.95rem;
+				color: #fff;
+			}
+			.project-card p {
+				margin: 0;
+				font-size: 0.82rem;
+				opacity: 0.7;
+				line-height: 1.5;
+			}
+			.project-tag {
+				display: inline-block;
+				background: rgba(123,94,167,0.3);
+				border: 1px solid var(--accent2);
+				border-radius: 3px;
+				font-size: 0.7rem;
+				padding: 0.1rem 0.4rem;
+				margin-right: 0.3rem;
+				margin-top: 0.4rem;
+				color: #ccc;
+			}
+
+			/* Lang bars */
+			.lang-row {
+				display: flex;
+				align-items: center;
+				gap: 0.8rem;
+				margin-bottom: 0.5rem;
+			}
+			.lang-name { width: 80px; font-size: 0.85rem; }
+			.lang-bar-bg {
+				flex: 1;
+				height: 5px;
+				background: rgba(255,255,255,0.12);
+				border-radius: 3px;
+				overflow: hidden;
+			}
+			.lang-bar { height: 100%; background: var(--accent); border-radius: 3px; }
+
+			/* Intérêts */
+			.interests { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+			.interest-chip {
+				background: rgba(255,255,255,0.06);
+				border: 1px solid rgba(255,255,255,0.15);
+				border-radius: 20px;
+				padding: 0.3rem 0.8rem;
+				font-size: 0.8rem;
+			}
+
+			/* Section title accent */
+			article h3.section-label {
+				font-size: 0.7rem;
+				letter-spacing: 0.2em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin: 1.4rem 0 0.6rem;
+				border-bottom: 1px solid rgba(0,212,255,0.2);
+				padding-bottom: 0.3rem;
+			}
+
+			/* Formulaire de contact */
+			.contact-form {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin: 2rem 0;
+			}
+			.contact-form .form-group {
+				display: flex;
+				flex-direction: column;
+			}
+			.contact-form .form-group.full {
+				grid-column: 1 / -1;
+			}
+			.contact-form label {
+				font-size: 0.75rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: #fff;
+				margin-bottom: 0.5rem;
+				opacity: 0.7;
+			}
+			.contact-form input,
+			.contact-form textarea {
+				background: rgba(255,255,255,0.08);
+				border: 1px solid rgba(255,255,255,0.2);
+				color: #fff;
+				padding: 0.75rem;
+				font-family: inherit;
+				font-size: 0.9rem;
+				border-radius: 4px;
+				transition: border-color 0.25s, background 0.25s;
+			}
+			.contact-form input::placeholder,
+			.contact-form textarea::placeholder {
+				color: rgba(255,255,255,0.5);
+			}
+			.contact-form input:focus,
+			.contact-form textarea:focus {
+				outline: none;
+				background: rgba(255,255,255,0.12);
+				border-color: var(--accent);
+			}
+			.contact-form textarea {
+				min-height: 200px;
+				resize: vertical;
+			}
+			.form-buttons {
+				grid-column: 1 / -1;
+				display: flex !important;
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+			.form-buttons button {
+				padding: 0.75rem 1.5rem !important;
+				font-size: 0.85rem !important;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: all 0.25s;
+				font-weight: bold;
+				text-align: center !important;
+				flex: 1 !important;
+				display: flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				min-height: 48px !important;
+				line-height: 1 !important;
+			}
+			.form-buttons .send-btn {
+				background: #ffffff !important;
+				color: #000000 !important;
+				border: none !important;
+			}
+			.form-buttons .send-btn:hover {
+				background: var(--accent) !important;
+				color: #000000 !important;
+			}
+			.form-buttons .clear-btn {
+				background: transparent !important;
+				color: #ffffff !important;
+				border: 1px solid #ffffff !important;
+			}
+			.form-buttons .clear-btn:hover {
+				background: rgba(255,255,255,0.1) !important;
+				border-color: var(--accent) !important;
+				color: var(--accent) !important;
+			}
+			.form-message {
+				margin-top: 1rem;
+				padding: 1rem;
+				border-radius: 4px;
+				display: none;
+				text-align: center;
+			}
+			.form-message.success {
+				display: block;
+				background: rgba(0, 212, 255, 0.15);
+				color: var(--accent);
+				border: 1px solid var(--accent);
+			}
+			.form-message.error {
+				display: block;
+				background: rgba(255, 100, 100, 0.15);
+				color: #ff6464;
+				border: 1px solid #ff6464;
+			}
+
+			@media (max-width: 768px) {
+				.contact-form {
+					grid-template-columns: 1fr;
+				}
+				.form-buttons {
+					flex-direction: column;
+				}
+				.form-buttons button {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<!-- ══ HEADER ══ -->
+			<header id="header">
+				<div class="logo">
+					<img src="images/profile.jpeg" alt="Pape Makhtar Sylla" class="profile-img" id="profileImg">
+				</div>
+				<div class="content">
+					<div class="inner">
+						<h1>Pape Makhtar Sylla</h1>
+						<p>Élève Ingénieur en Informatique &amp; Télécommunications<br />
+						École Polytechnique de Thiès · 3<sup>ème</sup> année<br />
+						<em style="font-size:0.85em;opacity:0.7;">Cybersécurité · Intelligence Artificielle · Systèmes Embarqués . Cloud</em></p>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#profil">Profil</a></li>
+						<li><a href="#competences">Compétences</a></li>
+						<li><a href="#projets">Projets</a></li>
+						<li><a href="#formation">Formation</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<div id="main">
+
+				<!-- ══ PROFIL ══ -->
+				<article id="profil">
+					<h2 class="major">Profil</h2>
+					<p>
+						Attiré par la <strong>cybersécurité</strong>, l'<strong>intelligence artificielle</strong> et les <strong>systèmes embarqués</strong>, je construis mon parcours autour d'une approche polyvalente et d'une forte envie d'apprendre. Ma formation généraliste me permet d'aborder différents domaines technologiques avec rigueur, curiosité et adaptabilité.
+					</p>
+					<p>
+						Sérieux et motivé, je souhaite intégrer des environnements où je pourrai participer concrètement à des projets tout en développant davantage mes compétences techniques et professionnelles. Ouvert d'esprit et passionné par l'innovation, je suis constamment à la recherche de nouvelles expériences et de défis enrichissants.
+					</p>
+
+					<h3 class="section-label">Soft Skills</h3>
+					<div class="skill-grid">
+						<span class="skill-badge">Capacité d'adaptation</span>
+						<span class="skill-badge">Curiosité intellectuelle</span>
+						<span class="skill-badge">Rigueur</span>
+						<span class="skill-badge">Autonomie</span>
+						<span class="skill-badge">Très organisé</span>
+						<span class="skill-badge">Ouvert d'esprit</span>
+					</div>
+
+					<h3 class="section-label">Langues</h3>
+					<div class="lang-row"><span class="lang-name">Français</span><div class="lang-bar-bg"><div class="lang-bar" style="width:100%"></div></div></div>
+					<div class="lang-row"><span class="lang-name">Anglais</span><div class="lang-bar-bg"><div class="lang-bar" style="width:60%"></div></div></div>
+					<div class="lang-row"><span class="lang-name">Wolof</span><div class="lang-bar-bg"><div class="lang-bar" style="width:100%"></div></div></div>
+
+					<h3 class="section-label">Centres d'intérêt</h3>
+					<div class="interests">
+						<span class="interest-chip">⚽ Football</span>
+						<span class="interest-chip">🏐 Volleyball</span>
+						<span class="interest-chip">♟ Échecs</span>
+						<span class="interest-chip">🎮 Jeux vidéos</span>
+					</div>
+				</article>
+
+				<!-- ══ COMPÉTENCES ══ -->
+				<article id="competences">
+					<h2 class="major">Compétences</h2>
+
+					<h3 class="section-label">Langages &amp; Outils</h3>
+					<div class="skill-grid">
+						<span class="skill-badge highlight">Python Avancé</span>
+						<span class="skill-badge highlight">Java / POO</span>
+						<span class="skill-badge highlight">JavaScript</span>
+						<span class="skill-badge highlight">Angular</span>
+						<span class="skill-badge highlight">Django</span>
+						<span class="skill-badge highlight">Spring Boot</span>
+						<span class="skill-badge">Language C</span>
+						<span class="skill-badge">SQL / PL-SQL</span>
+						<span class="skill-badge">MongoDB / NoSQL</span>
+						<span class="skill-badge">Merise</span>
+						<span class="skill-badge">UML / MVC</span>
+						<span class="skill-badge">GitHub</span>
+						<span class="skill-badge">Figma</span>
+						<span class="skill-badge">Bootstrap</span>
+					</div>
+
+					<h3 class="section-label">Domaines de compétence</h3>
+					<ul>
+						<li>Développement <strong>web backend</strong> performant (Spring Boot, Django)</li>
+						<li>Interfaces <strong>frontend</strong> modernes et responsives (Angular, HTML/CSS)</li>
+						<li>Conception d'expériences <strong>UX/UI</strong> ergonomiques (Figma)</li>
+						<li>Modélisation et structuration de <strong>systèmes d'information</strong> (UML, Merise)</li>
+						<li>Conception et gestion de <strong>bases de données</strong> (SQL, PL/SQL, MongoDB)</li>
+						<li>Entraînement et amélioration de modèles de <strong>Machine Learning</strong></li>
+						<li>Développement de <strong>systèmes embarqués</strong> et IoT</li>
+						<li>Analyse de la <strong>complexité algorithmique</strong></li>
+					</ul>
+
+					<h3 class="section-label">Connaissances de base</h3>
+					<div class="skill-grid">
+						<span class="skill-badge">Machine Learning</span>
+						<span class="skill-badge">Traitement du signal</span>
+						<span class="skill-badge">Recherche opérationnelle</span>
+						<span class="skill-badge">Réseaux informatiques</span>
+						<span class="skill-badge">Systèmes embarqués &amp; IoT</span>
+						<span class="skill-badge">Analyse de données</span>
+						<span class="skill-badge">UX/UI Design</span>
+					</div>
+				</article>
+
+				<!-- ══ PROJETS ══ -->
+				<article id="projets">
+					<h2 class="major">Projets Réalisés</h2>
+
+					<div class="project-card">
+						<h4>Plateforme To-Do-List multi-utilisateurs</h4>
+						<p>Application web avec gestion de comptes utilisateurs, développée successivement avec <strong>Django</strong> puis avec <strong>Spring Boot</strong>.</p>
+						<span class="project-tag">Django</span><span class="project-tag">Spring Boot</span><span class="project-tag">Java</span><span class="project-tag">Python</span>
+					</div>
+
+					<div class="project-card">
+						<h4>Plateforme de gestion des Stages &amp; Alumni</h4>
+						<p>Modélisation complète d'une plateforme de suivi des stages et des anciens élèves à l'aide des méthodes <strong>UML</strong>.</p>
+						<span class="project-tag">UML</span><span class="project-tag">Modélisation</span>
+					</div>
+
+					<div class="project-card">
+						<h4>Système de Recommandation Hybride (VOD/Netflix)</h4>
+						<p>Conception d'un système de recommandation hybride pour plateformes VOD, combinant filtrage collaboratif et filtrage basé sur le contenu via <strong>Machine Learning</strong>.</p>
+						<span class="project-tag">Machine Learning</span><span class="project-tag">Python</span><span class="project-tag">Recommandation</span>
+					</div>
+
+					<div class="project-card">
+						<h4>Système de réservation de billets d'avion</h4>
+						<p>Modélisation complète d'un système de gestion de réservation aérienne en utilisant la méthode <strong>Merise</strong>.</p>
+						<span class="project-tag">Merise</span><span class="project-tag">Base de données</span>
+					</div>
+
+					<div class="project-card">
+						<h4>App mobile &amp; Web — Musée des Civilisations Noires</h4>
+						<p>Conception d'une application mobile et d'un site web lors du <strong>Hackathon « Digitalisation du Musée des Civilisations Noires »</strong>.</p>
+						<span class="project-tag">Mobile</span><span class="project-tag">Web</span><span class="project-tag">Hackathon</span><span class="project-tag">UX/UI</span>
+					</div>
+
+					<div class="project-card">
+						<h4>Prédiction d'Attrition Client (Churn) &amp; Optimisation du ROI</h4>
+						<p>Modèle de <strong>Machine Learning</strong> pour prédire le désabonnement client et optimiser le retour sur investissement des actions de rétention.</p>
+						<span class="project-tag">Machine Learning</span><span class="project-tag">Python</span><span class="project-tag">Data Science</span>
+					</div>
+				</article>
+
+				<!-- ══ FORMATION ══ -->
+				<article id="formation">
+					<h2 class="major">Formation</h2>
+
+					<ul class="timeline">
+						<li>
+							<div class="date">2026 — Présent</div>
+							<strong>1ère année — Cycle Diplôme d'Ingénieur</strong><br/>
+							Informatique &amp; Télécommunications
+							<div class="school">École Polytechnique de Thiès</div>
+						</li>
+						<li>
+							<div class="date">Octobre 2023 — Juillet 2025</div>
+							<strong>Deux ans de Tronc Commun (L2)</strong>
+							<div class="school">École Polytechnique de Thiès</div>
+						</li>
+						<li>
+							<div class="date">2023</div>
+							<strong>Baccalauréat Série S2 — Mention Très Bien</strong>
+							<div class="school">Collège Moderne Troisième Millénaire</div>
+						</li>
+					</ul>
+
+					<h3 class="section-label">À propos de l'École Polytechnique de Thiès</h3>
+					<p style="font-size:0.85rem;opacity:0.75;line-height:1.6;">
+						Grande école d'ingénieurs publique sénégalaise, l'EPT forme des ingénieurs polyvalents dans les domaines de l'informatique, des télécommunications, du génie civil et de l'électromécanique.
+					</p>
+				</article>
+
+				<!-- ══ CONTACT ══ -->
+				<article id="contact">
+					<h2 class="major">Contact</h2>
+
+					<p>N'hésitez pas à me contacter pour toute opportunité de stage, collaboration ou projet.</p>
+
+					<form class="contact-form" id="contactForm">
+						<div class="form-group">
+							<label for="name">Nom</label>
+							<input type="text" id="name" name="name" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email" required>
+						</div>
+						<div class="form-group full">
+							<label for="message">Message</label>
+							<textarea id="message" name="message" required></textarea>
+						</div>
+						<div class="form-buttons">
+							<button type="submit" class="send-btn">Envoyer le message</button>
+							<button type="reset" class="clear-btn">Effacer</button>
+						</div>
+						<div id="formMessage" class="form-message"></div>
+					</form>
+
+					<ul class="alt" style="margin-top:2rem;margin-bottom:1.5rem;">
+						<li>
+							<span class="icon solid fa-phone" style="margin-right:0.6rem;color:var(--accent)"></span>
+							77 525 41 25 &nbsp;/&nbsp; 76 864 62 70
+						</li>
+						<li>
+							<span class="icon solid fa-envelope" style="margin-right:0.6rem;color:var(--accent)"></span>
+							<a href="mailto:pmsylla@ept.sn">pmsylla@ept.sn</a>
+						</li>
+						<li>
+							<span class="icon solid fa-map-marker-alt" style="margin-right:0.6rem;color:var(--accent)"></span>
+							Dakar — Parcelles Assainies, Sénégal
+						</li>
+					</ul>
+
+					<ul class="icons">
+						<li><a href="mailto:pmsylla@ept.sn" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="https://www.linkedin.com/in/pape-makhtar-sylla-2b45753a1?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/PapeeMS" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</article>
+
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<p class="copyright">&copy; 2026 Pape Makhtar Sylla</a></p>
+			</footer>
+
+		</div>
+
+		<!-- BG -->
+		<div id="bg"></div>
+
+		<!-- Lightbox Modal -->
+		<div id="imageLightbox" class="lightbox-modal">
+			<span class="lightbox-close" id="closeLightbox">&times;</span>
+			<img src="images/profile.jpeg" alt="Pape Makhtar Sylla" class="lightbox-content">
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- Lightbox Script -->
+		<script>
+			const profileImg = document.getElementById('profileImg');
+			const lightbox = document.getElementById('imageLightbox');
+			const closeBtn = document.getElementById('closeLightbox');
+
+			// Ouvrir la lightbox au clic sur l'image
+			profileImg.addEventListener('click', function() {
+				lightbox.classList.add('active');
+			});
+
+			// Fermer la lightbox au clic sur le X
+			closeBtn.addEventListener('click', function() {
+				lightbox.classList.remove('active');
+			});
+
+			// Fermer la lightbox au clic en dehors de l'image
+			lightbox.addEventListener('click', function(event) {
+				if (event.target === lightbox) {
+					lightbox.classList.remove('active');
+				}
+			});
+
+			// Fermer au clic sur la touche Echap
+			document.addEventListener('keydown', function(event) {
+				if (event.key === 'Escape') {
+					lightbox.classList.remove('active');
+				}
+			});
+		</script>
+
+	<!-- Contact Form Script -->
+	<script>
+		// Configuration pour FormSubmit.co
+		const contactForm = document.getElementById('contactForm');
+		const formMessage = document.getElementById('formMessage');
+		
+		// Définissez votre email ici
+		const YOUR_EMAIL = 'pmsylla@ept.sn';
+		
+		// Mettre à jour l'action du formulaire
+		contactForm.action = 'https://formsubmit.co/' + YOUR_EMAIL;
+		
+		// Ajouter un champ caché pour désactiver reCAPTCHA
+		const captchaInput = document.createElement('input');
+		captchaInput.type = 'hidden';
+		captchaInput.name = '_captcha';
+		captchaInput.value = 'false';
+		contactForm.appendChild(captchaInput);
+		
+		// Ajouter un champ caché pour la redirection après envoi
+		const redirectInput = document.createElement('input');
+		redirectInput.type = 'hidden';
+		redirectInput.name = '_next';
+		redirectInput.value = window.location.href;
+		contactForm.appendChild(redirectInput);
+		
+		// Gestion du submit
+		contactForm.addEventListener('submit', function(e) {
+			// Validation
+			const nameInput = document.getElementById('name');
+			const emailInput = document.getElementById('email');
+			const messageInput = document.getElementById('message');
+			
+			// Validation simple
+			if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
+				e.preventDefault();
+				formMessage.textContent = 'Veuillez remplir tous les champs requis';
+				formMessage.classList.remove('success');
+				formMessage.classList.add('error');
+				return false;
+			}
+			
+			// Validation email
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			if (!emailRegex.test(emailInput.value)) {
+				e.preventDefault();
+				formMessage.textContent = 'Veuillez entrer une adresse email valide';
+				formMessage.classList.remove('success');
+				formMessage.classList.add('error');
+				return false;
+			}
+			
+			// Afficher un message d'attente
+			formMessage.textContent = 'Envoi en cours...';
+			formMessage.classList.remove('error');
+			formMessage.classList.add('success');
+		});
+	</script>
+
