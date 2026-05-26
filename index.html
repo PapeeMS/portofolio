@@ -1,7 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP — Customisé pour Pape Makhtar Sylla
--->
 <html>
 	<head>
 		<title>Pape Makhtar Sylla — Portfolio</title>
@@ -11,13 +8,11 @@
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-			/* ── Overrides personnalisés ── */
 			:root {
 				--accent: #00d4ff;
 				--accent2: #7b5ea7;
 			}
 
-			/* Image de profil dans le logo */
 			#header .logo {
 				display: flex;
 				justify-content: center;
@@ -37,7 +32,6 @@
 				transform: scale(1.05);
 			}
 
-			/* Lightbox modal */
 			.lightbox-modal {
 				display: none;
 				position: fixed;
@@ -78,7 +72,6 @@
 				to { opacity: 1; }
 			}
 
-			/* Skill badges */
 			.skill-grid {
 				display: flex;
 				flex-wrap: wrap;
@@ -100,7 +93,6 @@
 				color: var(--accent);
 			}
 
-			/* Timeline formation */
 			.timeline {
 				list-style: none;
 				padding: 0;
@@ -135,7 +127,6 @@
 				margin-top: 0.15rem;
 			}
 
-			/* Projets cards */
 			.project-card {
 				background: rgba(255,255,255,0.05);
 				border: 1px solid rgba(255,255,255,0.12);
@@ -168,7 +159,6 @@
 				color: #ccc;
 			}
 
-			/* Lang bars */
 			.lang-row {
 				display: flex;
 				align-items: center;
@@ -185,7 +175,6 @@
 			}
 			.lang-bar { height: 100%; background: var(--accent); border-radius: 3px; }
 
-			/* Intérêts */
 			.interests { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
 			.interest-chip {
 				background: rgba(255,255,255,0.06);
@@ -195,7 +184,6 @@
 				font-size: 0.8rem;
 			}
 
-			/* Section title accent */
 			article h3.section-label {
 				font-size: 0.7rem;
 				letter-spacing: 0.2em;
@@ -206,7 +194,6 @@
 				padding-bottom: 0.3rem;
 			}
 
-			/* Formulaire de contact */
 			.contact-form {
 				display: grid;
 				grid-template-columns: 1fr 1fr;
@@ -332,7 +319,6 @@
 
 		<div id="wrapper">
 
-			<!-- ══ HEADER ══ -->
 			<header id="header">
 				<div class="logo">
 					<img src="images/profile.jpeg" alt="Pape Makhtar Sylla" class="profile-img" id="profileImg">
@@ -358,7 +344,6 @@
 
 			<div id="main">
 
-				<!-- ══ PROFIL ══ -->
 				<article id="profil">
 					<h2 class="major">Profil</h2>
 					<p>
@@ -392,7 +377,6 @@
 					</div>
 				</article>
 
-				<!-- ══ COMPÉTENCES ══ -->
 				<article id="competences">
 					<h2 class="major">Compétences</h2>
 
@@ -438,7 +422,6 @@
 					</div>
 				</article>
 
-				<!-- ══ PROJETS ══ -->
 				<article id="projets">
 					<h2 class="major">Projets Réalisés</h2>
 
@@ -479,7 +462,6 @@
 					</div>
 				</article>
 
-				<!-- ══ FORMATION ══ -->
 				<article id="formation">
 					<h2 class="major">Formation</h2>
 
@@ -508,7 +490,6 @@
 					</p>
 				</article>
 
-				<!-- ══ CONTACT ══ -->
 				<article id="contact">
 					<h2 class="major">Contact</h2>
 
@@ -565,46 +546,38 @@
 
 		</div>
 
-		<!-- BG -->
 		<div id="bg"></div>
 
-		<!-- Lightbox Modal -->
 		<div id="imageLightbox" class="lightbox-modal">
 			<span class="lightbox-close" id="closeLightbox">&times;</span>
 			<img src="images/profile.jpeg" alt="Pape Makhtar Sylla" class="lightbox-content">
 		</div>
 
-		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 
-		<!-- Lightbox Script -->
 		<script>
 			const profileImg = document.getElementById('profileImg');
 			const lightbox = document.getElementById('imageLightbox');
 			const closeBtn = document.getElementById('closeLightbox');
 
-			// Ouvrir la lightbox au clic sur l'image
 			profileImg.addEventListener('click', function() {
 				lightbox.classList.add('active');
 			});
 
-			// Fermer la lightbox au clic sur le X
 			closeBtn.addEventListener('click', function() {
 				lightbox.classList.remove('active');
 			});
 
-			// Fermer la lightbox au clic en dehors de l'image
 			lightbox.addEventListener('click', function(event) {
 				if (event.target === lightbox) {
 					lightbox.classList.remove('active');
 				}
 			});
 
-			// Fermer au clic sur la touche Echap
 			document.addEventListener('keydown', function(event) {
 				if (event.key === 'Escape') {
 					lightbox.classList.remove('active');
@@ -612,48 +585,38 @@
 			});
 		</script>
 
-	<!-- Contact Form Script -->
 	<script>
-		// Configuration pour FormSubmit.co
 		const contactForm = document.getElementById('contactForm');
 		const formMessage = document.getElementById('formMessage');
 		
-		// Définissez votre email ici
 		const YOUR_EMAIL = 'pmsylla@ept.sn';
 		
-		// Mettre à jour l'action du formulaire
 		contactForm.action = 'https://formsubmit.co/' + YOUR_EMAIL;
 		
-		// Ajouter un champ caché pour désactiver reCAPTCHA
 		const captchaInput = document.createElement('input');
 		captchaInput.type = 'hidden';
 		captchaInput.name = '_captcha';
 		captchaInput.value = 'false';
 		contactForm.appendChild(captchaInput);
 		
-		// Ajouter un champ caché pour la redirection après envoi
 		const redirectInput = document.createElement('input');
 		redirectInput.type = 'hidden';
 		redirectInput.name = '_next';
 		redirectInput.value = window.location.href;
 		contactForm.appendChild(redirectInput);
 		
-		// Créer une iframe invisible pour le formulaire
 		const iframe = document.createElement('iframe');
 		iframe.name = 'hidden_iframe';
 		iframe.style.display = 'none';
 		document.body.appendChild(iframe);
 		
-		// Gestion du submit
 		contactForm.addEventListener('submit', function(e) {
 			e.preventDefault();
 			
-			// Validation
 			const nameInput = document.getElementById('name');
 			const emailInput = document.getElementById('email');
 			const messageInput = document.getElementById('message');
 			
-			// Validation simple
 			if (!nameInput.value.trim() || !emailInput.value.trim() || !messageInput.value.trim()) {
 				formMessage.textContent = 'Veuillez remplir tous les champs requis';
 				formMessage.classList.remove('success');
@@ -661,7 +624,6 @@
 				return false;
 			}
 			
-			// Validation email
 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			if (!emailRegex.test(emailInput.value)) {
 				formMessage.textContent = 'Veuillez entrer une adresse email valide';
@@ -670,28 +632,23 @@
 				return false;
 			}
 			
-			// Afficher un message d'attente
 			formMessage.textContent = 'Envoi en cours...';
 			formMessage.classList.remove('error');
 			formMessage.classList.add('success');
 			
-			// Envoyer le formulaire à l'iframe
 			contactForm.target = 'hidden_iframe';
 			contactForm.submit();
 			
-			// Afficher le message de succès après 1 seconde
 			setTimeout(() => {
 				formMessage.textContent = 'Message envoyé avec succès!';
 				formMessage.classList.remove('error');
 				formMessage.classList.add('success');
 				
-				// Réinitialiser le formulaire
 				contactForm.reset();
 				nameInput.value = '';
 				emailInput.value = '';
 				messageInput.value = '';
 				
-				// Masquer le message après 5 secondes
 				setTimeout(() => {
 					formMessage.textContent = '';
 					formMessage.classList.remove('success');
